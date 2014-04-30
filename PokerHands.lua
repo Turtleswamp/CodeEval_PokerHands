@@ -1,0 +1,1 @@
+-- solution to https://www.codeeval.com/open_challenges/86/

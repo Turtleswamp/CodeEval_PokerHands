@@ -12,8 +12,8 @@ describe("Test Hand clasifications", function()
 		assert.same(new_hand("QS 2D 7C TS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
 		end)
 	if("is thwo pair", function()
-		assert.same(new_hand("2S 2D 7C 7S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,7),new_match(2,2)}, highCard={11, 7, 7, 2, 2}}));
-		assert.same(new_hand("QS 2D 7C 7S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12),new_match(2,7)}, highCard={12, 12, 7, 7, 2}}));
+		assert.same(new_hand("2S 2D 7C 7S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,7), new_match(2,2)}, highCard={11, 7, 7, 2, 2}}));
+		assert.same(new_hand("QS 2D 7C 7S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12), new_match(2,7)}, highCard={12, 12, 7, 7, 2}}));
 		end)
 	it("is three of a kind", function()
 		assert.same(new_hand("2S 2D 2C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,2)}, highCard={11, 10, 2, 2, 2}}));
@@ -40,18 +40,22 @@ describe("Test Hand clasifications", function()
 		assert.same(new_hand("QH JH TH KH AH"):get_value(), new_value({isFlush=14, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
 		end)
 	end)
+	
 describe("Test hand rankings", function()
-	local royalFlush=new_hand("QH JH TH KH AH"):get_value();
-	local straightFlush=new_hand("2S 3S 4S 5S 6S"):get_value();
-	local fourOf=new_hand("2S 2D 2C 2S JH"):get_value();
-	local fullHouse=new_hand("2S 2D 2C TS TH"):get_value();
-	local flush=new_hand("2S 3S 7S TS JS"):get_value();
-	local straight=new_hand("2S 3D 4C 5S 6H"):get_value();
-	local threeOf=new_hand("2S 2D 2C TS JH"):get_value();
-	local twoPair=new_hand("2S 2D 7C 7S JH"):get_value();
-	local onePair=new_hand("QS 2D 7C TS QH"):get_value();
-	local highCard=new_hand("2S 4D 7C TS JH"):get_value();
-	local lowCard=new_hand("2S 4D 7C TS 3H"):get_value();
+	local royalFlush, straightFlush, fourOf, fullHouse, flush, straight, threeOf, twoPair, onePair, highCard, lowCard;
+	setup(function()
+		royalFlush=new_hand("QH JH TH KH AH"):get_value();
+		straightFlush=new_hand("2S 3S 4S 5S 6S"):get_value();
+		fourOf=new_hand("2S 2D 2C 2S JH"):get_value();
+		fullHouse=new_hand("2S 2D 2C TS TH"):get_value();
+		flush=new_hand("2S 3S 7S TS JS"):get_value();
+		straight=new_hand("2S 3D 4C 5S 6H"):get_value();
+		threeOf=new_hand("2S 2D 2C TS JH"):get_value();
+		twoPair=new_hand("2S 2D 7C 7S JH"):get_value();
+		onePair=new_hand("QS 2D 7C TS QH"):get_value();
+		highCard=new_hand("2S 4D 7C TS JH"):get_value();
+		lowCard=new_hand("2S 4D 7C TS 3H"):get_value();
+	end)
 	
 	it("royal flush beats all", function()
 		assert.is_not_true(royalFlush > royalFlush);
