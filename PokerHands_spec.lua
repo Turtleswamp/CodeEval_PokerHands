@@ -4,57 +4,57 @@ require("busted");
 
 describe("Test Hand clasifications", function()
 	it("is high card", function() 
-		assert.same(new_hand("2S 4D 7C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches=false, highCard={11, 10, 7, 4, 2}}));
-		assert.same(new_hand("2S 4D 7C TS 3H"):get_value(), new_value({isFlush=false, isStriaght=false, matches=false, highCard={10, 7, 4, 3, 2}}));
+		assert.same(hand.new("2S 4D 7C TS JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches=false, highCard={11, 10, 7, 4, 2}}));
+		assert.same(hand.new("2S 4D 7C TS 3H"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches=false, highCard={10, 7, 4, 3, 2}}));
 	end)
 	it("is one pair", function()
-		assert.same(new_hand("2S 2D 7C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,2)}, highCard={11, 10, 7, 2, 2}}));
-		assert.same(new_hand("QS 2D 7C TS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
+		assert.same(hand.new("2S 2D 7C TS JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(2,2)}, highCard={11, 10, 7, 2, 2}}));
+		assert.same(hand.new("QS 2D 7C TS QH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
 	end)
 	it("is two pair", function()
-		assert.same(new_hand("2S 2D 7C 7S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,7), new_match(2,2)}, highCard={11, 7, 7, 2, 2}}));
-		assert.same(new_hand("QS 2D 7C 7S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12), new_match(2,7)}, highCard={12, 12, 7, 7, 2}}));
+		assert.same(hand.new("2S 2D 7C 7S JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(2,7), new_match(2,2)}, highCard={11, 7, 7, 2, 2}}));
+		assert.same(hand.new("QS 2D 7C 7S QH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(2,12), new_match(2,7)}, highCard={12, 12, 7, 7, 2}}));
 	end)
 	it("is three of a kind", function()
-		assert.same(new_hand("2S 2D 2C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,2)}, highCard={11, 10, 2, 2, 2}}));
-		assert.same(new_hand("QS 2D QC TS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,12)}, highCard={12, 12, 12, 10, 2}}));
+		assert.same(hand.new("2S 2D 2C TS JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(3,2)}, highCard={11, 10, 2, 2, 2}}));
+		assert.same(hand.new("QS 2D QC TS QH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(3,12)}, highCard={12, 12, 12, 10, 2}}));
 	end)
 	it("is straight", function()
-		assert.same(new_hand("2S 3D 4C 5S 6H"):get_value(), new_value({isFlush=false, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
-		assert.same(new_hand("JS QD KC AS TH"):get_value(), new_value({isFlush=false, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
+		assert.same(hand.new("2S 3D 4C 5S 6H"):get_value(), hand.value.new({isFlush=false, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
+		assert.same(hand.new("JS QD KC AS TH"):get_value(), hand.value.new({isFlush=false, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
 	end)
 	it("is flush", function()
-		assert.same(new_hand("2S 3S 7S TS JS"):get_value(), new_value({isFlush=11, isStriaght=false, matches=false, highCard={11, 10, 7, 3, 2}}));
-		assert.same(new_hand("QH 2H 7H TH QH"):get_value(), new_value({isFlush=12, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
+		assert.same(hand.new("2S 3S 7S TS JS"):get_value(), hand.value.new({isFlush=11, isStriaght=false, matches=false, highCard={11, 10, 7, 3, 2}}));
+		assert.same(hand.new("QH 2H 7H TH QH"):get_value(), hand.value.new({isFlush=12, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
 	end)
 	it("is full house", function()
-		assert.same(new_hand("2S 2D 2C TS TH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,2), new_match(2,10)}, highCard={10, 10, 2, 2, 2}}));
-		assert.same(new_hand("QS 2D QC 2S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_matcy(3,12),new_match(2,22)}, highCard={12, 12, 12, 2, 2}}));
+		assert.same(hand.new("2S 2D 2C TS TH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(3,2), new_match(2,10)}, highCard={10, 10, 2, 2, 2}}));
+		assert.same(hand.new("QS 2D QC 2S QH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_matcy(3,12),new_match(2,22)}, highCard={12, 12, 12, 2, 2}}));
 	end)
 	it("is four of a kind", function()
-		assert.same(new_hand("2S 2D 2C 2S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(4,2)}, highCard={11, 2, 2, 2, 2}}));
-		assert.same(new_hand("QS 2D QC QS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(4,12)}, highCard={12, 12, 12, 12, 2}}));
+		assert.same(hand.new("2S 2D 2C 2S JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(4,2)}, highCard={11, 2, 2, 2, 2}}));
+		assert.same(hand.new("QS 2D QC QS QH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches={new_match(4,12)}, highCard={12, 12, 12, 12, 2}}));
 	end)
 	it("is straight flush", function()
-		assert.same(new_hand("2S 3S 4S 5S 6S"):get_value(), new_value({isFlush=6, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
-		assert.same(new_hand("QH JH TH KH AH"):get_value(), new_value({isFlush=14, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
+		assert.same(hand.new("2S 3S 4S 5S 6S"):get_value(), hand.value.new({isFlush=6, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
+		assert.same(hand.new("QH JH TH KH AH"):get_value(), hand.value.new({isFlush=14, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
 	end)
 end)
 	
 describe("Test hand rankings", function()
 	local royalFlush, straightFlush, fourOf, fullHouse, flush, straight, threeOf, twoPair, onePair, highCard, lowCard;
-	setup(function()
-		royalFlush=new_hand("QH JH TH KH AH"):get_value();
-		straightFlush=new_hand("2S 3S 4S 5S 6S"):get_value();
-		fourOf=new_hand("2S 2D 2C 2S JH"):get_value();
-		fullHouse=new_hand("2S 2D 2C TS TH"):get_value();
-		flush=new_hand("2S 3S 7S TS JS"):get_value();
-		straight=new_hand("2S 3D 4C 5S 6H"):get_value();
-		threeOf=new_hand("2S 2D 2C TS JH"):get_value();
-		twoPair=new_hand("2S 2D 7C 7S JH"):get_value();
-		onePair=new_hand("QS 2D 7C TS QH"):get_value();
-		highCard=new_hand("2S 4D 7C TS JH"):get_value();
-		lowCard=new_hand("2S 4D 7C TS 3H"):get_value();
+	(function()
+		royalFlush=hand.new("QH JH TH KH AH"):get_value();
+		straightFlush=hand.new("2S 3S 4S 5S 6S"):get_value();
+		fourOf=hand.new("2S 2D 2C 2S JH"):get_value();
+		fullHouse=hand.new("2S 2D 2C TS TH"):get_value();
+		flush=hand.new("2S 3S 7S TS JS"):get_value();
+		straight=hand.new("2S 3D 4C 5S 6H"):get_value();
+		threeOf=hand.new("2S 2D 2C TS JH"):get_value();
+		twoPair=hand.new("2S 2D 7C 7S JH"):get_value();
+		onePair=hand.new("QS 2D 7C TS QH"):get_value();
+		highCard=hand.new("2S 4D 7C TS JH"):get_value();
+		lowCard=hand.new("2S 4D 7C TS 3H"):get_value();
 	end)
 	
 	it("royal flush beats all", function()
