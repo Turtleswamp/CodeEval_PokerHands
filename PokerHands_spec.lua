@@ -6,40 +6,40 @@ describe("Test Hand clasifications", function()
 	it("is high card", function() 
 		assert.same(new_hand("2S 4D 7C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches=false, highCard={11, 10, 7, 4, 2}}));
 		assert.same(new_hand("2S 4D 7C TS 3H"):get_value(), new_value({isFlush=false, isStriaght=false, matches=false, highCard={10, 7, 4, 3, 2}}));
-		end)
+	end)
 	it("is one pair", function()
 		assert.same(new_hand("2S 2D 7C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,2)}, highCard={11, 10, 7, 2, 2}}));
 		assert.same(new_hand("QS 2D 7C TS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
-		end)
-	if("is thwo pair", function()
+	end)
+	it("is two pair", function()
 		assert.same(new_hand("2S 2D 7C 7S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,7), new_match(2,2)}, highCard={11, 7, 7, 2, 2}}));
 		assert.same(new_hand("QS 2D 7C 7S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(2,12), new_match(2,7)}, highCard={12, 12, 7, 7, 2}}));
-		end)
+	end)
 	it("is three of a kind", function()
 		assert.same(new_hand("2S 2D 2C TS JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,2)}, highCard={11, 10, 2, 2, 2}}));
 		assert.same(new_hand("QS 2D QC TS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,12)}, highCard={12, 12, 12, 10, 2}}));
-		end)
+	end)
 	it("is straight", function()
 		assert.same(new_hand("2S 3D 4C 5S 6H"):get_value(), new_value({isFlush=false, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
 		assert.same(new_hand("JS QD KC AS TH"):get_value(), new_value({isFlush=false, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
-		end)
+	end)
 	it("is flush", function()
 		assert.same(new_hand("2S 3S 7S TS JS"):get_value(), new_value({isFlush=11, isStriaght=false, matches=false, highCard={11, 10, 7, 3, 2}}));
 		assert.same(new_hand("QH 2H 7H TH QH"):get_value(), new_value({isFlush=12, isStriaght=false, matches={new_match(2,12)}, highCard={12, 12, 10, 7, 2}}));
-		end)
+	end)
 	it("is full house", function()
 		assert.same(new_hand("2S 2D 2C TS TH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(3,2), new_match(2,10)}, highCard={10, 10, 2, 2, 2}}));
 		assert.same(new_hand("QS 2D QC 2S QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_matcy(3,12),new_match(2,22)}, highCard={12, 12, 12, 2, 2}}));
-		end)
+	end)
 	it("is four of a kind", function()
 		assert.same(new_hand("2S 2D 2C 2S JH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(4,2)}, highCard={11, 2, 2, 2, 2}}));
 		assert.same(new_hand("QS 2D QC QS QH"):get_value(), new_value({isFlush=false, isStriaght=false, matches={new_match(4,12)}, highCard={12, 12, 12, 12, 2}}));
-		end)
-	it("is striaght flush", functions()
+	end)
+	it("is straight flush", function()
 		assert.same(new_hand("2S 3S 4S 5S 6S"):get_value(), new_value({isFlush=6, isStriaght=6, matches=false, highCard={6, 5, 4, 3, 2}}));
 		assert.same(new_hand("QH JH TH KH AH"):get_value(), new_value({isFlush=14, isStriaght=14, matches=false, highCard={14, 13, 12, 11, 10}}));
-		end)
 	end)
+end)
 	
 describe("Test hand rankings", function()
 	local royalFlush, straightFlush, fourOf, fullHouse, flush, straight, threeOf, twoPair, onePair, highCard, lowCard;
@@ -69,7 +69,7 @@ describe("Test hand rankings", function()
 		assert.is_true(royalFlush > onePair);
 		assert.is_true(royalFlush > highCard);
 		assert.is_true(royalFlush > lowCard);
-		end)
+	end)
 	it("straight flush beats four of a kind", function()
 		assert.is_not_true(straightFlush > royalFlush);
 		assert.is_not_true(straightFlush > straightFlush);
@@ -82,7 +82,7 @@ describe("Test hand rankings", function()
 		assert.is_true(straightFlush > onePair);
 		assert.is_true(straightFlush > highCard);
 		assert.is_true(straightFlush > lowCard);
-		end)
+	end)
 	it("four of a kind beats full house", function()
 		assert.is_not_true(fourOf > royalFlush);
 		assert.is_not_true(fourOf > straightFlush);
@@ -95,7 +95,7 @@ describe("Test hand rankings", function()
 		assert.is_true(fourOf > onePair);
 		assert.is_true(fourOf > highCard);
 		assert.is_true(fourOf > lowCard);
-		end)
+	end)
 	it("full house beats flush", function()
 		assert.is_not_true(fullHouse > royalFlush);
 		assert.is_not_true(fullHouse > straightFlush);
@@ -108,7 +108,7 @@ describe("Test hand rankings", function()
 		assert.is_true(fullHouse > onePair);
 		assert.is_true(fullHouse > highCard);
 		assert.is_true(fullHouse > lowCard);
-		end)
+	end)
 	it("flush beats straight", function()
 		assert.is_not_true(flush > royalFlush);
 		assert.is_not_true(flush > straightFlush);
@@ -121,7 +121,7 @@ describe("Test hand rankings", function()
 		assert.is_true(flush > onePair);
 		assert.is_true(flush > highCard);
 		assert.is_true(flush > lowCard);
-		end)
+	end)
 	it("straight beats three of a kind", function()
 		assert.is_not_true(straight > royalFlush);
 		assert.is_not_true(straight > straightFlush);
@@ -134,7 +134,7 @@ describe("Test hand rankings", function()
 		assert.is_true(straight > onePair);
 		assert.is_true(straight > highCard);
 		assert.is_true(straight > lowCard);
-		end)
+	end)
 	it("three of a kind beats two pair", function()
 		assert.is_not_true(threeOf > royalFlush);
 		assert.is_not_true(threeOf > straightFlush);
@@ -147,7 +147,7 @@ describe("Test hand rankings", function()
 		assert.is_true(threeOf > onePair);
 		assert.is_true(threeOf > highCard);
 		assert.is_true(threeOf > lowCard);
-		end)
+	end)
 	it("two pair beats one pair", function()
 		assert.is_not_true(twoPair > royalFlush);
 		assert.is_not_true(twoPair > straightFlush);
@@ -160,7 +160,7 @@ describe("Test hand rankings", function()
 		assert.is_true(twoPair > onePair);
 		assert.is_true(twoPair > highCard);
 		assert.is_true(twoPair > lowCard);
-		end)
+	end)
 	it("one pair beats high card", function()
 		assert.is_not_true(onePair > royalFlush);
 		assert.is_not_true(onePair > straightFlush);
@@ -173,7 +173,7 @@ describe("Test hand rankings", function()
 		assert.is_not_true(onePair > onePair);
 		assert.is_true(onePair > highCard);
 		assert.is_true(onePair > lowCard);
-		end)
+	end)
 	it("high card beats low card", function()
 		assert.is_not_true(highCard > royalFlush);
 		assert.is_not_true(highCard > straightFlush);
@@ -186,5 +186,5 @@ describe("Test hand rankings", function()
 		assert.is_not_true(highCard > onePair);
 		assert.is_not_true(highCard > highCard);
 		assert.is_true(highCard > lowCard);
-		end)
 	end)
+end)
