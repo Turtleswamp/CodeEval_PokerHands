@@ -18,10 +18,9 @@ install:
 script: "busted spec"
 
 notifications:
-  webhooks:
-    - http://my-url/travis-results
+
   recipients:
-    - lucal@lamotte.com
+    - lucas@tuirtleswamp.com
   email:
     on_success: change
     on_failure: always
