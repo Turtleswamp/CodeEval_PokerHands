@@ -2,7 +2,19 @@
 
 require("busted");
 
-describe("Test Hand clasifications", function()
+describe("testing busted framework #test", function()
+	it("hellow world", function()
+		assert.is_true(true);
+	end)
+	it("can see deck", function()		
+		assert.is_not_nil(deck);
+	end)
+	it("can see hand", function()
+		assert.is_not_nil(hand);
+	end)
+end)
+
+describe("Test Hand clasifications #classify", function()
 	it("is high card", function() 
 		assert.same(hand.new("2S 4D 7C TS JH"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches=false, highCard={11, 10, 7, 4, 2}}));
 		assert.same(hand.new("2S 4D 7C TS 3H"):get_value(), hand.value.new({isFlush=false, isStriaght=false, matches=false, highCard={10, 7, 4, 3, 2}}));
@@ -41,21 +53,19 @@ describe("Test Hand clasifications", function()
 	end)
 end)
 	
-describe("Test hand rankings", function()
+describe("Test hand rankings #compare", function()
 	local royalFlush, straightFlush, fourOf, fullHouse, flush, straight, threeOf, twoPair, onePair, highCard, lowCard;
-	(function()
-		royalFlush=hand.new("QH JH TH KH AH"):get_value();
-		straightFlush=hand.new("2S 3S 4S 5S 6S"):get_value();
-		fourOf=hand.new("2S 2D 2C 2S JH"):get_value();
-		fullHouse=hand.new("2S 2D 2C TS TH"):get_value();
-		flush=hand.new("2S 3S 7S TS JS"):get_value();
-		straight=hand.new("2S 3D 4C 5S 6H"):get_value();
-		threeOf=hand.new("2S 2D 2C TS JH"):get_value();
-		twoPair=hand.new("2S 2D 7C 7S JH"):get_value();
-		onePair=hand.new("QS 2D 7C TS QH"):get_value();
-		highCard=hand.new("2S 4D 7C TS JH"):get_value();
-		lowCard=hand.new("2S 4D 7C TS 3H"):get_value();
-	end)
+		royalFlush		= hand.new("QH JH TH KH AH"):get_value();
+		straightFlush	= hand.new("2S 3S 4S 5S 6S"):get_value();
+		fourOf			= hand.new("2S 2D 2C 2S JH"):get_value();
+		fullHouse		= hand.new("2S 2D 2C TS TH"):get_value();
+		flush			= hand.new("2S 3S 7S TS JS"):get_value();
+		straight		= hand.new("2S 3D 4C 5S 6H"):get_value();
+		threeOf			= hand.new("2S 2D 2C TS JH"):get_value();
+		twoPair			= hand.new("2S 2D 7C 7S JH"):get_value();
+		onePair			= hand.new("QS 2D 7C TS QH"):get_value();
+		highCard		= hand.new("2S 4D 7C TS JH"):get_value();
+		lowCard			= hand.new("2S 4D 7C TS 3H"):get_value();
 	
 	it("royal flush beats all", function()
 		assert.is_not_true(royalFlush > royalFlush);
