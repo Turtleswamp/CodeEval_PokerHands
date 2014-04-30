@@ -20,7 +20,7 @@ script: "busted spec"
 notifications:
 
   recipients:
-    - lucas@tuirtleswamp.com
+    - lucas@turtleswamp.com
   email:
     on_success: change
     on_failure: always
