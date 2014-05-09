@@ -54,3 +54,7 @@ deck["JH"] = {value=11, suite="H"};
 deck["QH"] = {value=12, suite="H"};
 deck["KH"] = {value=13, suite="H"};
 deck["AH"] = {value=14, suite="H"};
+
+deck.compare_cards = function(left_card, right_card)
+	return left_card.value > right_card.value;
+end
