@@ -170,7 +170,7 @@ hand.compare = function (left, right)
 		else
 			return true;
 		end
-	elseif right.isStraight and right.flush then
+	elseif right.isStraight and right.isFlush then
 		return false;
 	end
 	-- for of a kind
@@ -205,7 +205,7 @@ hand.compare = function (left, right)
 			return true;
 		end
 	elseif right.isFlush then
-		return true;
+		return false;
 	end
 	-- straight
 	if left.isStraight then
@@ -274,4 +274,18 @@ hand.compare = function (left, right)
 		end
 	end
 	return false;
+end
+
+for line in io.lines(arg[1]) do
+		local leftString, rightString = line:match("(%w%w %w%w %w%w %w%w %w%w) (%w%w %w%w %w%w %w%w %w%w)");
+		local leftHand = hand.new(leftString):get_value();
+		local rightHand = hand.new(rightString):get_value();
+
+		if hand.compare(leftHand, rightHand) then
+			print("left");
+		elseif hand.compare(rightHand, leftHand) then
+			print("right");
+		else
+			print("none");
+		end
 end

@@ -1,7 +1,11 @@
 require("busted");
 
 describe("hand should exist", function()
-	setup(loadfile("PokerHands.lua"));
+	setup(function()
+		debugFlag = true;
+		loadfile("PokerHands.lua")();
+	end)
+	
 	it("deck does exist", function()
 		assert.not_nil(deck);
 		end)
@@ -65,142 +69,186 @@ describe("hand should exist", function()
 		-- Royal Flush
 		it("royal flush beats straight flush", function()
 			assert.is_true(hand.compare(royalFlush, straightFlush));
+			assert.is_false(hand.compare(straightFlush, royalFlush));
 		end)
 		it("royal flush beats 4 of a kind", function()
 			assert.is_true(hand.compare(royalFlush, fourOf));
+			assert.is_false(hand.compare(fourOf, royalFlush));
 		end)
 		it("royal flush beats full house", function()
 			assert.is_true(hand.compare(royalFlush, fullHouse));
+			assert.is_false(hand.compare(fullHouse, royalFlush));
 		end)
 		it("royal flush beats flush", function()
 			assert.is_true(hand.compare(royalFlush, flush));
+			assert.is_false(hand.compare(flush, royalFlush));
 		end)
 		it("royal flush beats straight", function()
 			assert.is_true(hand.compare(royalFlush, straight));
+			assert.is_false(hand.compare(straight, royalFlush));
 		end)
 		it("royal flush beats 3 of a kind", function()
 			assert.is_true(hand.compare(royalFlush, threeOf));
+			assert.is_false(hand.compare(threeOf, royalFlush));
 		end)
 		it("royal flush beats 2 pair", function()
 			assert.is_true(hand.compare(royalFlush, twoPair));
+			assert.is_false(hand.compare(twoPair, royalFlush));
 		end)
 		it("royal flush beats pair", function()
 			assert.is_true(hand.compare(royalFlush, onePair));
+			assert.is_false(hand.compare(onePair, royalFlush));
 		end)
 		it("royal flush beats high card", function()
 			assert.is_true(hand.compare(royalFlush, highCard));
+			assert.is_false(hand.compare(highCard, royalFlush));
 		end)
 		-- Straight Flush
 		it("straight flush beats 4 of a kind", function()
 			assert.is_true(hand.compare(straightFlush, fourOf));
+			assert.is_false(hand.compare(fourOf, straightFlush));
 		end)
 		it("straight flush beats full house", function()
 			assert.is_true(hand.compare(straightFlush, fullHouse));
+			assert.is_false(hand.compare(fullHouse, straightFlush));
 		end)
 		it("straight flush beats flush", function()
 			assert.is_true(hand.compare(straightFlush, flush));
+			assert.is_false(hand.compare(flush, straightFlush));
 		end)
 		it("straight flush beats straight", function()
 			assert.is_true(hand.compare(straightFlush, straight));
+			assert.is_false(hand.compare(straight, straightFlush));
 		end)
 		it("straight flush beats 3 of a kind", function()
 			assert.is_true(hand.compare(straightFlush, threeOf));
+			assert.is_false(hand.compare(threeOf, straightFlush));
 		end)
 		it("straight flush beats 2 pair", function()
 			assert.is_true(hand.compare(straightFlush, twoPair));
+			assert.is_false(hand.compare(twoPair, straightFlush));
 		end)
 		it("straight flush beats pair", function()
 			assert.is_true(hand.compare(straightFlush, onePair));
+			assert.is_false(hand.compare(onePair, straightFlush));
 		end)
 		it("straight flush beats high card", function()
 			assert.is_true(hand.compare(straightFlush, highCard));
+			assert.is_false(hand.compare(highCard, straightFlush));
 		end)
 		-- four of a kind
 		it("4 of a kind beats full house", function()
 			assert.is_true(hand.compare(fourOf, fullHouse));
+			assert.is_false(hand.compare(fullHouse, fourOf));
 		end)
 		it("4 of a kind beats flush", function()
 			assert.is_true(hand.compare(fourOf, flush));
+			assert.is_false(hand.compare(flush, fourOf));
 		end)
 		it("4 of a kind beats straight", function()
 			assert.is_true(hand.compare(fourOf, straight));
+			assert.is_false(hand.compare(straight, fourOf));
 		end)
 		it("4 of a kind beats 3 of a kind", function()
 			assert.is_true(hand.compare(fourOf, threeOf));
+			assert.is_false(hand.compare(threeOf, fourOf));
 		end)
 		it("4 of a kind beats 2 pair", function()
 			assert.is_true(hand.compare(fourOf, twoPair));
+			assert.is_false(hand.compare(twoPair, fourOf));
 		end)
 		it("4 of a kind beats pair", function()
 			assert.is_true(hand.compare(fourOf, onePair));
+			assert.is_false(hand.compare(onePair, fourOf));
 		end)
 		it("4 of a kind beats high card", function()
 			assert.is_true(hand.compare(fourOf, highCard));
+			assert.is_false(hand.compare(highCard, fourOf));
 		end)
 		-- full house
 		it("full house beats flush", function()
 			assert.is_true(hand.compare(fullHouse, flush));
+			assert.is_false(hand.compare(flush, fullHouse));
 		end)
 		it("full house beats straight", function()
 			assert.is_true(hand.compare(fullHouse, straight));
+			assert.is_false(hand.compare(straight, fullHouse));
 		end)
 		it("full house beats 3 of a kind", function()
 			assert.is_true(hand.compare(fullHouse, threeOf));
+			assert.is_false(hand.compare(threeOf, fullHouse));
 		end)
 		it("full house beats 2 pair", function()
 			assert.is_true(hand.compare(fullHouse, twoPair));
+			assert.is_false(hand.compare(twoPair, fullHouse));
 		end)
 		it("full house beats pair", function()
 			assert.is_true(hand.compare(fullHouse, onePair));
+			assert.is_false(hand.compare(onePair, fullHouse));
 		end)
 		it("full house beats high card", function()
 			assert.is_true(hand.compare(fullHouse, highCard));
+			assert.is_false(hand.compare(highCard, fullHouse));
 		end)
 		-- flush
 		it("flush beats straight", function()
 			assert.is_true(hand.compare(flush, straight));
+			assert.is_false(hand.compare(straight, flush));
 		end)
 		it("flush beats 3 of a kind", function()
 			assert.is_true(hand.compare(flush, threeOf));
+			assert.is_false(hand.compare(threeOf, flush));
 		end)
 		it("flush beats 2 pair", function()
 			assert.is_true(hand.compare(flush, twoPair));
+			assert.is_false(hand.compare(twoPair, flush));
 		end)
 		it("flush beats pair", function()
 			assert.is_true(hand.compare(flush, onePair));
+			assert.is_false(hand.compare(onePair, flush));
 		end)
 		it("flush beats high card", function()
 			assert.is_true(hand.compare(flush, highCard));
+			assert.is_false(hand.compare(highCard, flush));
 		end)
 		-- straight
 		it("straight beats 3 of a kind", function()
 			assert.is_true(hand.compare(straight, threeOf));
+			assert.is_false(hand.compare(threeOf, straight));
 		end)
 		it("straight beats 2 pair", function()
 			assert.is_true(hand.compare(straight, twoPair));
+			assert.is_false(hand.compare(twoPair, straight));
 		end)
 		it("straight beats pair", function()
 			assert.is_true(hand.compare(straight, onePair));
+			assert.is_false(hand.compare(onePair, straight));
 		end)
 		it("straight beats high card", function()
 			assert.is_true(hand.compare(straight, highCard));
+			assert.is_false(hand.compare(highCard, straight));
 		end)
 		-- 3 of a kind
 		it("3 of a kind beats 2 pair", function()
 			assert.is_true(hand.compare(threeOf, twoPair));
+			assert.is_false(hand.compare(twoPair, threeOf));
 		end)
 		it("3 of a kind beats pair", function()
 			assert.is_true(hand.compare(threeOf, onePair));
+			assert.is_false(hand.compare(onePair, threeOf));
 		end)
 		it("3 of a kind beats high card", function()
 			assert.is_true(hand.compare(threeOf, highCard));
+			assert.is_false(hand.compare(highCard, threeOf));
 		end)
 		-- 2 pair
 		it("2 pair beats pair", function()
 			assert.is_true(hand.compare(twoPair, onePair));
+			assert.is_false(hand.compare(onePair, twoPair));
 		end)
 		it("2 pair beats high card", function()
 			assert.is_true(hand.compare(twoPair, highCard));
+			assert.is_false(hand.compare(highCard, twoPair));
 		end)
 		it("2 pair with hogh card beats 2 Pair with low card card", function()
 			assert.is_true(hand.compare(hand.new("AH AD JS JS 6S"):get_value(), hand.new("AS AC JH JH 3H"):get_value()));
